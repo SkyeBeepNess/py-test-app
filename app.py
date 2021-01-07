@@ -39,7 +39,7 @@ def test(update, context):
 	message = fetch()
 	text = ''
 	for keys in message:
-		text += keys.replace('\n ', '') + ': ' + message[keys] + ' Сум \n'
+		text += keys.strip() + ': ' + message[keys] + ' Сум \n'
 	print(text)
 	
 	if update.effective_message.text:
