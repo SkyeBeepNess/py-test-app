@@ -2,9 +2,9 @@ import requests
 import telegram
 import logging
 import time
+import webbrowser
 from datetime import datetime, date
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, PicklePersistence
-
 from bs4 import BeautifulSoup
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
@@ -38,22 +38,41 @@ def send(x):
 
 
 
-def testMessage(update, context):
+def music(update, context):
 
 	print(update.effective_message.chat_id)
+
+	url = 'https://www.youtube.com/watch?v=Mvvsa5HAJiI&list=RDMM&start_radio=1'
+
+	#webbrowser.open_new_tab(url)
+
+def play(update, context):
+	search = ''
+	print(update.effective_message.chat_id)
+	searchwords = update.effective_message.text.split(' ')[1:]
+	for words in searchwords:
+		search += words + '+'
+	searchurl = 'https://www.youtube.com/results?search_query=' + search 
+	print(searchurl)
+	page = requests.get(searchurl)
+	soup = BeautifulSoup(page.content, 'html.parser')
+	url = soup.find_all(href="/watch?v=NWNlhiNvDWk")
+	print(url)
+	#webbrowser.open_new_tab(url)
 
 def main():
 	#today()
 	
 	pp = PicklePersistence(filename='file')
-	updater = Updater("1410913727:AAEBkP3V0s7pp82J7Hl15U8BMApEiU-QXBA", persistence=pp, use_context=True)
+	updater = Updater("1560323106:AAHs3Yf9_dh26gCUL6sWfwh08veRgodWcms", persistence=pp, use_context=True)
 	dispatcher = updater.dispatcher
 
-	dispatcher.add_handler(MessageHandler(Filters.regex('test'), testMessage))	
-	today()
+	dispatcher.add_handler(CommandHandler('music', music))	
+	dispatcher.add_handler(CommandHandler('play', play))
+	#today()
 
 
-	
+	#exit()
 
 
 	updater.start_polling()
