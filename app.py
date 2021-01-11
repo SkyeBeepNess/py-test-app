@@ -29,9 +29,9 @@ def today():
 		message = "Goodnight Beepness, today is " + d + " and it's currently " + t
 	send(message)
 
-def send(x):
+def send(message):
 	requests.post(
-        url=f'https://api.telegram.org/bot1410913727:AAEBkP3V0s7pp82J7Hl15U8BMApEiU-QXBA/sendMessage?chat_id=208339045&text={x}&parse_mode=HTML'
+        url=f'https://api.telegram.org/bot1410913727:AAEBkP3V0s7pp82J7Hl15U8BMApEiU-QXBA/sendMessage?chat_id=208339045&text={message}&parse_mode=HTML'
     )
 	
 
@@ -44,20 +44,21 @@ def music(update, context):
 
 	url = 'https://www.youtube.com/watch?v=Mvvsa5HAJiI&list=RDMM&start_radio=1'
 
-	#webbrowser.open_new_tab(url)
+	webbrowser.open_new_tab(url)
 
 def play(update, context):
-	search = ''
-	print(update.effective_message.chat_id)
-	searchwords = update.effective_message.text.split(' ')[1:]
-	for words in searchwords:
-		search += words + '+'
-	searchurl = 'https://www.youtube.com/results?search_query=' + search 
-	print(searchurl)
-	page = requests.get(searchurl)
-	soup = BeautifulSoup(page.content, 'html.parser')
-	url = soup.find_all(href="/watch?v=NWNlhiNvDWk")
-	print(url)
+	pass
+	#search = ''
+	#print(update.effective_message.chat_id)
+	#searchwords = update.effective_message.text.split(' ')[1:]
+	#for words in searchwords:
+	#	search += words + '+'
+	#searchurl = 'https://www.youtube.com/results?search_query=' + search 
+	#print(searchurl)
+	#page = requests.get(searchurl)
+	#soup = BeautifulSoup(page.content, 'html.parser')
+	#url = soup.find_all(href="/watch?v=NWNlhiNvDWk")
+	#print(url)
 	#webbrowser.open_new_tab(url)
 
 def main():
@@ -69,7 +70,7 @@ def main():
 
 	dispatcher.add_handler(CommandHandler('music', music))	
 	dispatcher.add_handler(CommandHandler('play', play))
-	#today()
+	today()
 
 
 	#exit()
