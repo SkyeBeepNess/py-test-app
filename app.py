@@ -31,7 +31,7 @@ def today():
 
 def send(message):
 	requests.post(
-        url=f'https://api.telegram.org/bot1410913727:AAEBkP3V0s7pp82J7Hl15U8BMApEiU-QXBA/sendMessage?chat_id=208339045&text={message}&parse_mode=HTML'
+        url=f'https://api.telegram.org/bot1560323106:AAHmhV9yoGR7i0Q4SvlJg7rAGIPyha6lZAo/sendMessage?chat_id=208339045&text={message}&parse_mode=HTML'
     )
 	
 
@@ -65,10 +65,11 @@ def main():
 	#today()
 	
 	pp = PicklePersistence(filename='file')
-	updater = Updater("1560323106:AAHs3Yf9_dh26gCUL6sWfwh08veRgodWcms", persistence=pp, use_context=True)
+	updater = Updater("1560323106:AAHmhV9yoGR7i0Q4SvlJg7rAGIPyha6lZAo", persistence=pp, use_context=True)
 	dispatcher = updater.dispatcher
 
-	dispatcher.add_handler(CommandHandler('music', music))	
+	
+	dispatcher.add_handler(CommandHandler('music', music))
 	dispatcher.add_handler(CommandHandler('play', play))
 	today()
 
