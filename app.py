@@ -56,10 +56,18 @@ def play(update, context):
 	#searchurl = 'https://www.youtube.com/results?search_query=' + search 
 	#print(searchurl)
 	#page = requests.get(searchurl)
-	#soup = BeautifulSoup(page.content, 'html.parser')
-	#url = soup.find_all(href="/watch?v=NWNlhiNvDWk")
+
+
+	#session = HTMLSession()
+	#r = asession.get("https://www.youtube.com/results?search_query=test")
+	#await r.html.arender()
+	#soup = BeautifulSoup(r.html.html, 'lxml')
+	#print(soup)
+	#url = soup.find(id="video-title")
+	
 	#print(url)
 	#webbrowser.open_new_tab(url)
+
 
 def main():
 	#today()
