@@ -17,16 +17,24 @@ def today():
 	# Textual month, day and year	
 	d = today.strftime("%dth of %B, %Y")
 	t = time.strftime("%H:%M")
+	url = 'https://weather.com/weather/today/l/41.32,69.27?par=google&temp=c'
 
 	if int(t.split(':')[0]) >= 5 and int(t.split(':')[0]) < 12:
-		message = "Gooooodmornin' Beepness, today is " + d + " and it's currently" + t
+		message = "Gooooodmornin' Beepness, today is<code> " + d + " </code>and it's currently<code> " + t + "</code>."
 	elif int(t.split(':')[0]) >= 12 and int(t.split(':')[0]) < 18:
-		message = "Hello Beepness, today is<code> " + d + " </code>and it's currently<code> " + t + " </code>"
-		
+		message = "Hello Beepness, today is<code> " + d + " </code>and it's currently<code> " + t + "</code>."
 	elif int(t.split(':')[0]) >= 18 and int(t.split(':')[0]) < 23:
-		message = "Good evening Beepness, today is " + d + " and it's currently " + t
+		message = "Good evening Beepness, today is<code> " + d + " </code>and it's currently<code> " + t + "</code>."
 	else:
-		message = "Goodnight Beepness, today is " + d + " and it's currently " + t
+		message = "Goodnight Beepness, today is<code> " + d + " </code>and it's currently<code> " + t + "</code>."
+
+	page = requests.get(url)
+	soup = BeautifulSoup(page.text, 'html.parser')
+	temp = soup.find(class_="CurrentConditions--tempValue--3KcTQ")
+	t = temp.get_text()
+
+	message += '\nAnd it\'s<code> ' + t + ' </code>outside.'
+
 	send(message)
 
 def send(message):
