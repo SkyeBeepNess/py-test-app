@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime, date
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, PicklePersistence
 import testweb
+from requests_html import HTMLSession
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
 
@@ -56,7 +57,15 @@ def music(update, context):
 		webbrowser.open_new_tab(url)
 
 def play(update, context):
-	pass
+	session = HTMLSession()
+	r = session.get('https://www.youtube.com/results?search_query=it%27ll+all+be+great+put+your+picture+on+my+wall+')
+	r.html.render()
+	soup = BeautifulSoup(r.html.html, 'lxml')
+	url = soup.find('a', id="video-title")
+	watch = url.get('href')
+	print('===========')
+	print(watch)
+	print('===========')
 	#search = ''
 	#print(update.effective_message.chat_id)
 	#searchwords = update.effective_message.text.split(' ')[1:]
@@ -92,7 +101,7 @@ def main():
 	dispatcher.add_handler(CommandHandler('play', play))
 	today()
 
-	testweb.func()
+	
 	#exit()
 
 

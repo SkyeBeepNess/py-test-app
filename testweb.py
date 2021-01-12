@@ -8,6 +8,9 @@ from requests_html import HTMLSession
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
 def func():
+	func1()
+
+def func1():
 	session = HTMLSession()
 	r = session.get('https://www.youtube.com/results?search_query=it%27ll+all+be+great+put+your+picture+on+my+wall+')
 	r.html.render()
