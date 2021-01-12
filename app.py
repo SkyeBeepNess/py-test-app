@@ -3,9 +3,10 @@ import telegram
 import logging
 import time
 import webbrowser
+from bs4 import BeautifulSoup
 from datetime import datetime, date
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, PicklePersistence
-from bs4 import BeautifulSoup
+import testweb
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
 
@@ -48,11 +49,11 @@ def send(message):
 
 def music(update, context):
 
-	print(update.effective_message.chat_id)
+	#print(update.effective_message.chat_id)
+	if update.effective_message.chat_id == 208339045:
+		url = 'https://www.youtube.com/watch?v=Mvvsa5HAJiI&list=RDMM&start_radio=1'
 
-	url = 'https://www.youtube.com/watch?v=Mvvsa5HAJiI&list=RDMM&start_radio=1'
-
-	webbrowser.open_new_tab(url)
+		webbrowser.open_new_tab(url)
 
 def play(update, context):
 	pass
@@ -77,9 +78,11 @@ def play(update, context):
 	#webbrowser.open_new_tab(url)
 
 
+
 def main():
 	#today()
-	
+
+		
 	pp = PicklePersistence(filename='file')
 	updater = Updater("1560323106:AAHmhV9yoGR7i0Q4SvlJg7rAGIPyha6lZAo", persistence=pp, use_context=True)
 	dispatcher = updater.dispatcher
@@ -89,7 +92,7 @@ def main():
 	dispatcher.add_handler(CommandHandler('play', play))
 	today()
 
-
+	testweb.func()
 	#exit()
 
 
